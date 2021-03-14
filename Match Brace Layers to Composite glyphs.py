@@ -1,6 +1,7 @@
 #MenuTitle: Match Brace Layers of Composite Glyphs to original Components 
 # -*- coding: utf-8 -*-
-
+# by Kostas Bartsokas
+from __future__ import division, print_function, unicode_literals
 __doc__="""
 Matches the setup of brace layers for all glyphs with components whose root glyph has brace layers
 """
@@ -26,7 +27,7 @@ def check_if_brace_layer(source, target):
 				newLayer = GSLayer()
 				newLayer.name = originalLayer.name
 				newLayer.setAssociatedMasterId_(originalLayer.associatedMasterId)
-				print "Added %s in %s" % (newLayer.name, target)
+				print("Added %s in %s" % (newLayer.name, target))
 				newLayer.width = originalLayer.width
 				target.layers.append(newLayer)
 				newLayer.reinterpolate()
@@ -49,7 +50,7 @@ def main():
 		# for each component of the first layer of G1 get the glyph (G2) of the component and check if G2 has brace layer and copy it
 		for thisComponent in thisGlyph.layers[0].components:
 			thisGlyph2 = font.glyphs[thisComponent.name]
-			print "Nesting (depth=0) inside %s is %s" % (thisGlyph.name, thisGlyph2.name)
+			print("Nesting (depth=0) inside %s is %s" % (thisGlyph.name, thisGlyph2.name))
 			check_if_brace_layer( thisGlyph2 , thisGlyph)
 			
 			#check if the G2 glyph has components
@@ -59,7 +60,7 @@ def main():
 				#if G2 has components ifor each component of the first layer of G2 get the glyph (G3) of the component and check if G3 has brace layer and copy it to G1
 				for thisComponent2 in thisGlyph2.layers[0].components:
 					thisGlyph3 = font.glyphs[thisComponent2.name]
-        			print "-Nesting (depth=1) inside %s is %s" % (thisGlyph2.name, thisGlyph3.name)
+        			print("-Nesting (depth=1) inside %s is %s" % (thisGlyph2.name, thisGlyph3.name))
         			check_if_brace_layer( thisGlyph3 , thisGlyph)
 
 					#check if the G3 glyph has components	
@@ -69,7 +70,7 @@ def main():
 						#if G3 has components for each component of the first layer of G3 get the glyph (G4) of the component and check if G4 has brace layer and copy it to G1
 						for thisComponent3 in thisGlyph3.layers[0].components:
 							thisGlyph4 = font.glyphs[thisComponent3.name]
-							print "--Nesting (depth=2) inside %s is %s" % (thisGlyph3.name, thisGlyph4.name)
+							print("--Nesting (depth=2) inside %s is %s" % (thisGlyph3.name, thisGlyph4.name))
 							check_if_brace_layer( thisGlyph4 , thisGlyph)
 	
 							#check if the G4 glyph has components	
@@ -79,7 +80,7 @@ def main():
 								#if G4 has components for each component of the first layer of G4 get the glyph (G5) of the component and check if G5 has brace layer and copy it to G1
 								for thisComponent4 in thisGlyph4.layers[0].components:
 									thisGlyph5 = font.glyphs[thisComponent4.name]
-									print "---Nesting (depth=3) inside %s is %s" % (thisGlyph4.name, thisGlyph5.name)
+									print("---Nesting (depth=3) inside %s is %s" % (thisGlyph4.name, thisGlyph5.name))
 									check_if_brace_layer( thisGlyph5 , thisGlyph)
 			
 									#check if the G5 glyph has components	
@@ -89,7 +90,7 @@ def main():
 									#if G5 has components for each component of the first layer of G5 get the glyph (G6) of the component and check if G6 has brace layer and copy it to G1
 										for thisComponent5 in thisGlyph5.layers[0].components:
 											thisGlyph6 = font.glyphs[thisComponent5.name]
-											print "----Nesting (depth=4) inside %s is %s" % (thisGlyph5.name, thisGlyph6.name)
+											print("----Nesting (depth=4) inside %s is %s" % (thisGlyph5.name, thisGlyph6.name))
 											check_if_brace_layer( thisGlyph6 , thisGlyph)
 											
 											#check if the G6 glyph has components	
@@ -99,7 +100,7 @@ def main():
 												#if G6 has components for each component of the first layer of G6 get the glyph (G7) of the component and check if G7 has brace layer and copy it to G1
 												for thisComponent6 in thisGlyph6.layers[0].components:
 													thisGlyph7 = font.glyphs[thisComponent6.name]
-													print "-----Nesting (depth=5) inside %s is %s" % (thisGlyph6.name, thisGlyph7.name)
+													print("-----Nesting (depth=5) inside %s is %s" % (thisGlyph6.name, thisGlyph7.name))
 													check_if_brace_layer( thisGlyph7 , thisGlyph)
 											else:
 												check_if_brace_layer( thisGlyph6 , thisGlyph)
